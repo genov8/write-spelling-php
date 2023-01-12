@@ -43,7 +43,7 @@ var_dump($result2); // сорок два тенге
 
 $percentSpelling = new \ZhandosProg\WriteSpelling\Spellings\PercentWriteSpelling();
 $result1 = $percentSpelling->generate(42.42, 'ru')
-var_dump($result1); 
+var_dump($result1); // сорок две целых сорок две сотых процента
 $result2 = $percentSpelling->generate(42, 'ru')
 var_dump($resul2); // сорок два процента
 
@@ -77,7 +77,8 @@ The package lacks refactoring, so for now we do not pay attention to the code. T
 What is to be done:
 - Do code analysis
 - Add abstraction
-- Refactoring generation code, redo dictionaries
+- Refactoring generation code
+- Change dictionaries
 - Make a facade
 - Add number generation
 - ...
