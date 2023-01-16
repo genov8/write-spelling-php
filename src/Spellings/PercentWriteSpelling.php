@@ -125,7 +125,7 @@ class PercentWriteSpelling
         }
 
         if ($number > '1' && $number < '5' ||
-            substr($number, 1,1) > '1' && substr($number, 1,1) < '5') {
+            substr($number, 1,1) > '1' && substr($number, 1,1) < '5' && $number > 20) {
             return $f2;
         }
 
