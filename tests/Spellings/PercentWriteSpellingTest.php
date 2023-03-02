@@ -1,6 +1,8 @@
 <?php
 
-namespace ZhandosProg\WriteSpelling\Spellings;
+declare(strict_types=1);
+
+namespace ZhandosProg\WriteSpelling\Tests\Spellings;
 
 use PHPUnit\Framework\TestCase;
 use ZhandosProg\WriteSpelling\Exceptions\NotSupportedException;
