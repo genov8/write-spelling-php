@@ -17,7 +17,7 @@ Package for generating number, amount and percent in spelling
 
 - [&check;] Generation amount in spelling
 - [&check;] Generation percent in spelling
-- [&cross;] Generation number in spelling
+- [&check;] Generation number in spelling
 
 ## Localizations
 
@@ -47,6 +47,12 @@ var_dump($result1); // сорок две целых сорок две сотых
 $result2 = $percentSpelling->generate(42, 'ru')
 var_dump($resul2); // сорок два процента
 
+$percentSpelling = new \ZhandosProg\WriteSpelling\Spellings\NumberWriteSpelling();
+$result1 = $percentSpelling->generate(42.42, 'ru')
+var_dump($result1); // сорок две целых сорок две сотых
+$result2 = $percentSpelling->generate(42, 'ru')
+var_dump($resul2); // сорок два
+
 ```
 
 #### Kazakh
@@ -64,6 +70,12 @@ var_dump($result1); // қырық екі бүтін жүзден қырық ек
 $result2 = $percentSpelling->generate(42)
 var_dump($result2); // қырық екі пайыз
 
+$percentSpelling = new \ZhandosProg\WriteSpelling\Spellings\NumberWriteSpelling();
+$result1 = $percentSpelling->generate(42.42)
+var_dump($result1); // қырық екі бүтін жүзден қырық екі
+$result2 = $percentSpelling->generate(42)
+var_dump($result2); // қырық екі
+
 ```
 
 ## Exceptions
@@ -76,11 +88,9 @@ The package lacks refactoring, so for now we do not pay attention to the code. T
 
 What is to be done:
 - Do code analysis
-- Add abstraction
 - Refactoring generation code
 - Change dictionaries
 - Make a facade
-- Add number generation
 - ...
 - ...
 
