@@ -39,7 +39,7 @@ class PercentWriteSpellingTest extends TestCase
         $amountWriteSpelling = new PercentWriteSpelling();
 
         $this->expectException(ValidationException::class);
-        $this->expectErrorMessage('Incorrect number format!');
+        $this->expectExceptionMessage('Incorrect number format!');
 
         $amountWriteSpelling->generate('1asd');
     }
@@ -49,7 +49,7 @@ class PercentWriteSpellingTest extends TestCase
         $amountWriteSpelling = new PercentWriteSpelling();
 
         $this->expectException(ValidationException::class);
-        $this->expectErrorMessage('The percentage must have a range of 0 to 100!');
+        $this->expectExceptionMessage('The percentage must have a range of 0 to 100!');
 
         $amountWriteSpelling->generate('101');
     }
@@ -60,7 +60,7 @@ class PercentWriteSpellingTest extends TestCase
         $amountWriteSpelling = new PercentWriteSpelling();
 
         $this->expectException(NotSupportedException::class);
-        $this->expectErrorMessage('Localization '. strtoupper($locale) .' not supported!');
+        $this->expectExceptionMessage('Localization '. strtoupper($locale) .' not supported!');
 
         $amountWriteSpelling->generate(12, $locale);
     }

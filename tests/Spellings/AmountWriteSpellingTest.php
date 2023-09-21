@@ -31,7 +31,7 @@ class AmountWriteSpellingTest extends TestCase
         $amountWriteSpelling = new AmountWriteSpelling();
 
         $this->expectException(ValidationException::class);
-        $this->expectErrorMessage('Incorrect number format!');
+        $this->expectExceptionMessage('Incorrect number format!');
 
         $amountWriteSpelling->generate('1asd');
     }
@@ -42,7 +42,7 @@ class AmountWriteSpellingTest extends TestCase
         $amountWriteSpelling = new AmountWriteSpelling();
 
         $this->expectException(NotSupportedException::class);
-        $this->expectErrorMessage('Localization '. strtoupper($locale) .' not supported!');
+        $this->expectExceptionMessage('Localization '. strtoupper($locale) .' not supported!');
 
         $amountWriteSpelling->generate(12, $locale);
     }
