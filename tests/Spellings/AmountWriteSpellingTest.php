@@ -7,6 +7,7 @@ namespace ZhandosProg\WriteSpelling\Tests\Spellings;
 use PHPUnit\Framework\TestCase;
 use ZhandosProg\WriteSpelling\Exceptions\NotSupportedException;
 use ZhandosProg\WriteSpelling\Exceptions\ValidationException;
+use ZhandosProg\WriteSpelling\Spellings\AmountWriteSpelling;
 
 class AmountWriteSpellingTest extends TestCase
 {

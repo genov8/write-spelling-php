@@ -4,15 +4,14 @@ declare(strict_types=1);
 
 namespace ZhandosProg\WriteSpelling\Spellings;
 
+use ZhandosProg\WriteSpelling\AbstractWriteSpelling;
 use ZhandosProg\WriteSpelling\Dictionaries\KazakhDictionary;
 use ZhandosProg\WriteSpelling\Dictionaries\RussiaDictionary;
 use ZhandosProg\WriteSpelling\Exceptions\NotSupportedException;
 use ZhandosProg\WriteSpelling\Exceptions\ValidationException;
 
-class PercentWriteSpelling
+class PercentWriteSpelling extends AbstractWriteSpelling
 {
-    protected const LOCALIZATIONS = ['kz', 'ru'];
-
     /**
      * @throws NotSupportedException
      * @throws ValidationException
@@ -21,7 +20,7 @@ class PercentWriteSpelling
     {
         $number = (string)$number;
 
-        if (!in_array($locale, static::LOCALIZATIONS)) {
+        if (!in_array($locale, self::LOCALIZATIONS)) {
             throw new NotSupportedException('Localization '. strtoupper($locale) .' not supported!');
         }
 
@@ -42,9 +41,9 @@ class PercentWriteSpelling
         if (isset($words['percent'][0][$whole])) {
             $result[] = $words['percent'][0][$tenthOrHundredth > 0 ? $this->neg((int)$whole) : $whole];
         } else {
-            for ($i=0; $i<strlen($whole); $i++) {
+            for ($i = 0; $i < strlen($whole); $i++) {
                 if ($i === 0) {
-                    $result[] = $words['percent'][0][$whole[$i]*10];
+                    $result[] = $words['percent'][0][(int)$whole[$i] * 10];
                 } else {
                     $result[] = $words['percent'][0][$tenthOrHundredth > 0 ? $this->neg((int)$whole[$i]) : $whole[$i]];
                 }
@@ -65,9 +64,9 @@ class PercentWriteSpelling
             if (isset($words['percent'][0][$tenthOrHundredth])) {
                 $result[] = $words['percent'][0][$this->neg((int)$tenthOrHundredth)];
             } else {
-                for ($i=0; $i<strlen($tenthOrHundredth); $i++) {
+                for ($i = 0; $i < strlen($tenthOrHundredth); $i++) {
                     if ($i === 0) {
-                        $result[] = $words['percent'][0][$tenthOrHundredth[$i]*10];
+                        $result[] = $words['percent'][0][(int)$tenthOrHundredth[$i] * 10];
                     } else {
                         $result[] = $words['percent'][0][$this->neg((int)$tenthOrHundredth[$i])];
                     }
@@ -89,33 +88,10 @@ class PercentWriteSpelling
     private function neg(int $number): int
     {
         if ($number === 1 || $number === 2) {
-            return -1*$number;
+            return -1 * $number;
         }
 
         return $number;
-    }
-
-    private function morphWhole(string $number, string $f1, string $f2): string
-    {
-        if ($number === '1' || str_ends_with($number, '1')) {
-            return $f2;
-        }
-
-        return $f1;
-    }
-
-    private function morphTenthOrHundredth(string $number, array $tenth, array $hundredth): string
-    {
-
-        if ($number < '10') {
-            return $number === '1' ? $tenth['1'] : $tenth['0'];
-        }
-
-        if ($number > '20') {
-            return str_ends_with($number, '1') ? $hundredth['1'] : $hundredth['0'];
-        }
-
-        return $hundredth['0'];
     }
 
     private function morphPercent(string $number, string $f1, string $f2, string $f3): string
@@ -125,7 +101,7 @@ class PercentWriteSpelling
         }
 
         if ($number > '1' && $number < '5' ||
-            substr($number, 1,1) > '1' && substr($number, 1,1) < '5' && $number > 20) {
+            substr($number, 1, 1) > '1' && substr($number, 1, 1) < '5' && $number > 20) {
             return $f2;
         }
 

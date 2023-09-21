@@ -6,7 +6,6 @@ namespace ZhandosProg\WriteSpelling\Dictionaries;
 
 class RussiaDictionary
 {
-
     public static array $words = [
         'zero' => 'ноль',
         'tenths' => [

@@ -4,15 +4,14 @@ declare(strict_types=1);
 
 namespace ZhandosProg\WriteSpelling\Spellings;
 
+use ZhandosProg\WriteSpelling\AbstractWriteSpelling;
 use ZhandosProg\WriteSpelling\Dictionaries\KazakhDictionary;
 use ZhandosProg\WriteSpelling\Dictionaries\RussiaDictionary;
 use ZhandosProg\WriteSpelling\Exceptions\NotSupportedException;
 use ZhandosProg\WriteSpelling\Exceptions\ValidationException;
 
-class AmountWriteSpelling
+class AmountWriteSpelling extends AbstractWriteSpelling
 {
-    protected const LOCALIZATIONS = ['kz', 'ru'];
-
     /**
      * @throws NotSupportedException
      * @throws ValidationException
@@ -21,7 +20,7 @@ class AmountWriteSpelling
     {
         $number = (string)$number;
 
-        if (!in_array($locale, static::LOCALIZATIONS)) {
+        if (!in_array($locale, self::LOCALIZATIONS)) {
             throw new NotSupportedException('Localization '. strtoupper($locale) .' not supported!');
         }
 
@@ -37,13 +36,13 @@ class AmountWriteSpelling
 
         if (intval($tenge) > 0) {
 
-            foreach(str_split($tenge,3) as $key => $v) {
+            foreach(str_split($tenge, 3) as $key => $v) {
 
                 if (!intval($v)) {
                     continue;
                 }
 
-                $key = sizeof($words['units'])-$key-1;
+                $key = sizeof($words['units']) - $key - 1;
                 $gender = $words['units'][$key][3];
 
                 list($i1, $i2, $i3) = array_map('intval', str_split($v));
@@ -70,7 +69,7 @@ class AmountWriteSpelling
 
             if (str_starts_with($tiin, '0')) {
                 $result[] = $words['tenths'][0][substr($tiin, 1, 1)];
-            } else if (str_ends_with($tiin, '0')) {
+            } elseif (str_ends_with($tiin, '0')) {
                 $result[] = substr($tiin, 0, 1) == 1
                     ? $words['hundredths1'][0]
                     : $words['hundredths2'][substr($tiin, 0, 1)];
@@ -88,26 +87,5 @@ class AmountWriteSpelling
         }
 
         return trim(preg_replace('/ {2,}/', ' ', join(' ', $result)));
-    }
-
-    private function morph(string|int $n, string $f1, string $f2, string $f3): string
-    {
-        $n = abs(intval($n)) % 100;
-
-        if ($n > 10 && $n < 20) {
-            return $f3;
-        }
-
-        $n = $n % 10;
-
-        if ($n > 1 && $n < 5) {
-            return $f2;
-        }
-
-        if ($n === 1) {
-            return $f1;
-        }
-
-        return $f3;
     }
 }
