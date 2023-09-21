@@ -1,0 +1,26 @@
+name: PHP Composer
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install dependencies
+        run: composer install --no-interaction --no-progress
+
+      - name: Execute Psalm
+        run: vendor/bin/psalm --no-progress --output-format=github
+
+      - name: Execute PHP-CS-Fixer
+        run: vendor/bin/php-cs-fixer fix src
+
+      - name: Run tests
+        run: vendor/bin/phpunit --do-not-cache-result
