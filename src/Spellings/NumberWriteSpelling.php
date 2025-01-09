@@ -28,7 +28,8 @@ class NumberWriteSpelling extends AbstractWriteSpelling
             throw new ValidationException('Incorrect number format!');
         }
 
-        $words = $locale === 'ru' ? RussiaDictionary::$words : KazakhDictionary::$words;
+        $dictionaryClass = $locale === 'ru' ? RussiaDictionary::class : KazakhDictionary::class;
+        $words = $dictionaryClass::all();
 
         list($whole, $tenthOrHundredth) = explode('.', sprintf("%015.2f", floatval($number)));
 

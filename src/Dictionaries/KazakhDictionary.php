@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace ZhandosProg\WriteSpelling\Dictionaries;
 
-class KazakhDictionary
+class KazakhDictionary extends BaseDictionary
 {
-    public static array $words = [
+    protected static array $words = [
         'zero' => 'нөл',
         'tenths' => [
             ['','бір','екі','үш','төрт','бес','алты','жеті', 'сегіз','тоғыз'],
@@ -30,7 +30,7 @@ class KazakhDictionary
             4 => 'қырық',
             5 => 'елу',
             6 => 'алпыс',
-            7 => 'жетпіс' ,
+            7 => 'жетпіс',
             8 => 'сексен',
             9 => 'тоқсан'
         ],
@@ -68,21 +68,12 @@ class KazakhDictionary
                 8 => 'сегіз',
                 9 => 'тоғыз',
                 10 => 'он',
-                11 => 'он бір',
-                12 => 'он екі',
-                13 => 'он үш',
-                14 => 'он төрт',
-                15 => 'он бес',
-                16 => 'он алты',
-                17 => 'он жеті',
-                18 => 'он сегіз',
-                19 => 'он тоғыз',
                 20 => 'жиырма',
                 30 => 'отыз',
                 40 => 'қырық',
                 50 => 'елу',
                 60 => 'алпыс',
-                70 => 'жетпіс' ,
+                70 => 'жетпіс',
                 80 => 'сексен',
                 90 => 'тоқсан',
                 100 => 'жүз',

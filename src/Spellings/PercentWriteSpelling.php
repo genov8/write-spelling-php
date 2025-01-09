@@ -32,7 +32,8 @@ class PercentWriteSpelling extends AbstractWriteSpelling
             throw new ValidationException('The percentage must have a range of 0 to 100!');
         }
 
-        $words = $locale === 'ru' ? RussiaDictionary::$words : KazakhDictionary::$words;
+        $dictionaryClass = $locale === 'ru' ? RussiaDictionary::class : KazakhDictionary::class;
+        $words = $dictionaryClass::all();
 
         list($whole, $tenthOrHundredth) = explode('.', sprintf("%.2f", floatval($number)));
 
