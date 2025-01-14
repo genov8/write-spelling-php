@@ -78,20 +78,27 @@ var_dump($result2); // қырық екі
 
 ```
 
+## Usage with facade
+
+```php
+
+$facade = new ZhandosProg\WriteSpelling\WriteSpellingFacade();
+
+// Generating amounts
+echo $facade->spellAmount(1234.56, 'ru'); // одна тысяча двести тридцать четыре тенге пятьдесят шесть тиын
+echo $facade->spellAmount(987.01, 'kz'); // тоғыз жүз сексен жеті бүтін бір оннан
+
+// Generating numbers
+echo $facade->spellNumber(1234, 'ru'); // одна тысяча двести тридцать четыре
+echo $facade->spellNumber(456, 'kz'); // төрт жүз елу алты
+
+// Generating percentages
+echo $facade->spellPercent(85.75, 'ru'); // восемьдесят пять целых семьдесят пять сотых процента
+echo $facade->spellPercent(99.9, 'kz'); // тоқсан тоғыз бүтін оннан тоғыз пайыз
+
+```
+
 ## Exceptions
 
 - ``NotSupportedException``
 - ``ValidationException``
-
-## Backlog
-The package lacks refactoring, so for now we do not pay attention to the code. The task was to make a working functional! :-)
-
-What is to be done:
-- Do code analysis
-- Refactoring generation code
-- Change dictionaries
-- Make a facade
-- ...
-- ...
-
-If possible, I will keep the package up to date and add upcoming tasks!
